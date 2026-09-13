@@ -1,24 +1,37 @@
 # Roadmap
 
-## 0.2 — Safer execution
+This roadmap communicates direction, not deadlines or commitments.
 
-- Add explicit observe, propose and apply modes
-- Add cooldowns and service rate limits
-- Write structured decision traces
-- Verify resulting state after actions
+## v0.2 — Safer execution
 
-## 0.3 — Live state
+- Introduce explicit observe, propose, and apply modes.
+- Add idempotency windows, cooldowns, and per-service rate limits.
+- Record structured decision traces.
+- Verify entity state after an applied action.
 
-- Add optional WebSocket subscriptions
-- Reconnect with bounded backoff
-- Detect stale entity data
-- Maintain a small state cache
+## v0.3 — Live state
 
-## 0.4 — Energy orchestration
+- Add an optional Home Assistant WebSocket adapter.
+- Reconnect with bounded exponential backoff.
+- Detect and reject stale entity state.
+- Add a bounded in-memory state cache.
 
-- Model PV surplus and grid-import limits
-- Add EV charging hysteresis examples
-- Aggregate heating demand
-- Keep vendors behind adapters
+## v0.4 — Configuration and energy examples
 
-This project will not replace Home Assistant, certified safety controllers or device firmware.
+- Define and validate a versioned configuration schema.
+- Load rules only after schema validation.
+- Add PV-surplus and EV-charging hysteresis examples.
+- Keep device- and vendor-specific behavior behind adapters.
+
+## Long-term quality
+
+- Document compatibility against supported Home Assistant releases.
+- Add contract tests against a disposable Home Assistant test instance.
+- Define deprecation and stable-API policies before v1.0.
+
+## Non-goals
+
+- Replacing Home Assistant.
+- Providing a hosted cloud control plane.
+- Acting as the only controller for alarms, access control, electrical
+  protection, heating limits, or other safety-critical functions.

@@ -1,0 +1,52 @@
+name: Bug report
+description: Report reproducible incorrect behavior
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Search existing issues first. Remove tokens, private URLs, entity inventories,
+        addresses, and other household data before submitting.
+  - type: input
+    id: version
+    attributes:
+      label: Project version or commit
+      placeholder: v0.1.0 or commit SHA
+    validations:
+      required: true
+  - type: input
+    id: python
+    attributes:
+      label: Python version
+      placeholder: Python 3.12.14
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the observed and expected behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Minimal reproduction
+      description: Use synthetic entity IDs and redacted output.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Sanitized logs
+      render: shell
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Data and safety check
+      options:
+        - label: I removed credentials and private household data.
+          required: true
+        - label: This report does not disclose an unpatched vulnerability.
+          required: true

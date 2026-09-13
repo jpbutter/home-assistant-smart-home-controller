@@ -1,0 +1,33 @@
+name: Feature request
+description: Propose a scoped improvement
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What concrete Home Assistant integration problem should be solved?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe inputs, outputs, errors, and side effects.
+    validations:
+      required: true
+  - type: dropdown
+    id: effect
+    attributes:
+      label: Side-effect level
+      options:
+        - Read-only
+        - Produces a proposal
+        - Calls a Home Assistant service
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered

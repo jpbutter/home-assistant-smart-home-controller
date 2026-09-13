@@ -1,10 +1,13 @@
+from collections.abc import Mapping
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Any
+from typing import Any, Self
 
 
 @dataclass(frozen=True)
 class EntityState:
+    """Validated subset of a Home Assistant entity-state response."""
+
     entity_id: str
     state: str
     attributes: dict[str, Any]
@@ -18,11 +21,22 @@ class EntityState:
             return None
 
     @classmethod
-    def from_api(cls, payload: dict[str, Any]) -> "EntityState":
+    def from_api(cls, payload: Mapping[str, Any]) -> Self:
+        entity_id = payload.get("entity_id")
+        state = payload.get("state")
+        attributes = payload.get("attributes", {})
         changed = payload.get("last_changed")
+
+        if not isinstance(entity_id, str) or not isinstance(state, str):
+            raise ValueError("entity_id and state must be strings")
+        if not isinstance(attributes, Mapping):
+            raise ValueError("attributes must be an object")
+        if changed is not None and not isinstance(changed, str):
+            raise ValueError("last_changed must be a string or null")
+
         return cls(
-            entity_id=str(payload["entity_id"]),
-            state=str(payload["state"]),
-            attributes=dict(payload.get("attributes", {})),
-            last_changed=datetime.fromisoformat(changed.replace("Z", "+00:00")) if changed else None,
+            entity_id=entity_id,
+            state=state,
+            attributes=dict(attributes),
+            last_changed=datetime.fromisoformat(changed) if changed else None,
         )
