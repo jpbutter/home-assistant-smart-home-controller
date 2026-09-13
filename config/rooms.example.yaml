@@ -1,0 +1,10 @@
+rooms:
+  living_room:
+    temperature: sensor.demo_living_temperature
+    humidity: sensor.demo_living_humidity
+    lights:
+      - light.demo_floor_lamp
+      - light.demo_ceiling
+  workshop:
+    temperature: sensor.demo_workshop_temperature
+    contact: binary_sensor.demo_workshop_door
