@@ -1,0 +1,16 @@
+rules:
+  - id: workshop_heat_warning
+    source_entity: sensor.demo_workshop_temperature
+    above: 28.0
+    action:
+      service: fan.turn_on
+      target_entity: fan.demo_workshop
+    mode: propose_only
+
+  - id: pv_surplus_example
+    source_entity: sensor.demo_grid_export_power
+    above: 1800
+    action:
+      service: switch.turn_on
+      target_entity: switch.demo_ev_charger
+    mode: propose_only
