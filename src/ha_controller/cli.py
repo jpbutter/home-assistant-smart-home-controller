@@ -19,6 +19,7 @@ def _settings() -> tuple[str, str]:
     ]
     if missing:
         raise ValueError(f"missing required environment variables: {', '.join(missing)}")
+    assert url is not None and token is not None
     return url, token
 
 
