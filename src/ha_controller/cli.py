@@ -9,8 +9,17 @@ from .client import HomeAssistantClient, HomeAssistantError
 def _settings() -> tuple[str, str]:
     url = os.getenv("HOME_ASSISTANT_URL")
     token = os.getenv("HOME_ASSISTANT_TOKEN")
-    if not url or not token:
-        raise ValueError("HOME_ASSISTANT_URL and HOME_ASSISTANT_TOKEN are required")
+    missing = [
+        name
+        for name, value in (
+            ("HOME_ASSISTANT_URL", url),
+            ("HOME_ASSISTANT_TOKEN", token),
+        )
+        if not value
+    ]
+    if missing:
+        raise ValueError(f"missing required environment variables: {', '.join(missing)}")
+    assert url is not None and token is not None
     return url, token
 
 
